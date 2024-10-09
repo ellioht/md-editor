@@ -3,9 +3,10 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import React, { useState } from "react";
 import CodeEditor from "@uiw/react-textarea-code-editor";
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 export default function Home() {
-  const [code, setCode] = useState(`function add(a, b) {\n  return a + b;\n}`);
+  const [code, setCode] = useState(`# Enter markdown here`);
   return (
     <div className="flex h-screen w-full flex-col">
       <div className="bg-border p-1 h-full w-full">
@@ -16,8 +17,7 @@ export default function Home() {
           <ResizablePanel defaultSize={50}>
             <CodeEditor
               value={code}
-              language="js"
-              placeholder="Please enter JS code."
+              language="md"
               onChange={(evn) => setCode(evn.target.value)}
               padding={15}
               style={{
@@ -31,8 +31,8 @@ export default function Home() {
           <ResizableHandle withHandle className="h-full border-2" />
 
           <ResizablePanel defaultSize={50}>
-            <div className="flex h-full items-center justify-center p-6">
-              <span className="font-semibold">Two</span>
+            <div className="w-full h-full">
+              <MarkdownPreview source={code} style={{ padding: 16 }} className="h-full w-full" />
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>
